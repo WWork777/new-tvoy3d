@@ -1,0 +1,108 @@
+- main [ref=e2]:
+  - generic [ref=e5]:
+    - link "Твой3д Твой3д 3D Print Lab" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "Твой3д" [ref=e7]
+      - generic [ref=e8]: Твой3д
+      - generic [ref=e9]: 3D Print Lab
+    - navigation [ref=e10]:
+      - link "Услуги" [ref=e11] [cursor=pointer]:
+        - /url: /#services
+      - link "О нас" [ref=e12] [cursor=pointer]:
+        - /url: /about
+      - link "Галерея" [ref=e13] [cursor=pointer]:
+        - /url: /gallery
+      - link "Блог" [ref=e14] [cursor=pointer]:
+        - /url: /blog
+      - link "Контакты" [ref=e15] [cursor=pointer]:
+        - /url: /contact
+    - generic [ref=e16]:
+      - link "+7 (993) 630-70-48" [ref=e17] [cursor=pointer]:
+        - /url: tel:+79936307048
+        - img [ref=e18]
+        - text: +7 (993) 630-70-48
+      - link "Рассчитать" [ref=e20] [cursor=pointer]:
+        - /url: /contact
+  - article [ref=e21]:
+    - generic [ref=e22]:
+      - link "В блог" [ref=e23] [cursor=pointer]:
+        - /url: /blog
+        - img [ref=e24]
+        - text: В блог
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]: Материалы
+          - generic [ref=e29]:
+            - img [ref=e30]
+            - text: 10 июня 2026
+          - generic [ref=e32]:
+            - img [ref=e33]
+            - text: 6 мин
+        - 'heading "PLA, ABS или PETG: какой пластик выбрать для 3D-печати" [level=1] [ref=e36]'
+        - paragraph [ref=e37]: Сравниваем популярные материалы по прочности, температурной стойкости, внешнему виду и применению в прототипах, корпусах и декоративных изделиях.
+      - 'img "PLA, ABS или PETG: какой пластик выбрать для 3D-печати" [ref=e39]'
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - heading "PLA — для макетов и визуальных моделей" [level=2] [ref=e42]
+          - paragraph [ref=e43]: PLA хорошо подходит для презентационных образцов, декора и деталей без серьёзной нагрузки. Он аккуратно печатается, даёт чистую поверхность и доступен в большом количестве цветов.
+        - generic [ref=e44]:
+          - heading "ABS — для корпусов и механики" [level=2] [ref=e45]
+          - paragraph [ref=e46]: ABS прочнее и лучше переносит нагрев, поэтому его часто выбирают для корпусов, кронштейнов и функциональных деталей. Для красивого результата обычно нужна постобработка.
+        - generic [ref=e47]:
+          - heading "PETG — универсальный вариант" [level=2] [ref=e48]
+          - paragraph [ref=e49]: PETG сочетает прочность, умеренную гибкость и стойкость к влаге. Его часто выбирают, когда нужна рабочая деталь без сложной финишной обработки.
+  - generic [ref=e50]:
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - img "Твой3д" [ref=e54]
+          - generic [ref=e55]: Твой3д
+        - paragraph [ref=e56]: Премиальная студия 3D-печати и прототипирования. Работаем по всей России.
+      - generic [ref=e57]:
+        - paragraph [ref=e58]: Услуги
+        - list [ref=e59]:
+          - listitem [ref=e60]:
+            - link "FDM-печать" [ref=e61] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e62]:
+            - link "SLA / Resin" [ref=e63] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e64]:
+            - link "Моделирование" [ref=e65] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e66]:
+            - link "Постобработка" [ref=e67] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e68]:
+        - paragraph [ref=e69]: Студия
+        - list [ref=e70]:
+          - listitem [ref=e71]:
+            - link "О нас" [ref=e72] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e73]:
+            - link "Портфолио" [ref=e74] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e75]:
+            - link "Процесс" [ref=e76] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e77]:
+            - link "Контакты" [ref=e78] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e79]:
+        - paragraph [ref=e80]: Контакты
+        - list [ref=e81]:
+          - listitem [ref=e82]:
+            - link "Куровское, ул. Советская 105" [ref=e83] [cursor=pointer]:
+              - /url: https://yandex.ru/maps/?text=Куровское%20ул.%20Советская%20105
+          - listitem [ref=e84]:
+            - link "tvoy-3d@yandex.ru" [ref=e85] [cursor=pointer]:
+              - /url: mailto:tvoy-3d@yandex.ru
+          - listitem [ref=e86]:
+            - link "+7 (993) 630-70-48" [ref=e87] [cursor=pointer]:
+              - /url: tel:+79936307048
+          - listitem [ref=e88]:
+            - link "@Tvoy3d" [ref=e89] [cursor=pointer]:
+              - /url: https://t.me/Tvoy3d
+    - generic [ref=e90]:
+      - paragraph [ref=e91]: © 2026 Твой3д. Все права защищены.
+      - paragraph [ref=e92]: Made with precision and red light.

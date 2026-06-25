@@ -1,0 +1,121 @@
+- main [ref=e2]:
+  - generic [ref=e5]:
+    - link "Твой3д Твой3д 3D Print Lab" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "Твой3д" [ref=e7]
+      - generic [ref=e8]: Твой3д
+      - generic [ref=e9]: 3D Print Lab
+    - navigation [ref=e10]:
+      - link "Услуги" [ref=e11] [cursor=pointer]:
+        - /url: /dorogobuzh#services
+      - link "О нас" [ref=e12] [cursor=pointer]:
+        - /url: /dorogobuzh/about
+      - link "Галерея" [ref=e13] [cursor=pointer]:
+        - /url: /dorogobuzh/gallery
+      - link "Блог" [ref=e14] [cursor=pointer]:
+        - /url: /dorogobuzh/blog
+      - link "Контакты" [ref=e15] [cursor=pointer]:
+        - /url: /dorogobuzh/contact
+    - generic [ref=e16]:
+      - link "+7 (993) 630-70-48" [ref=e17] [cursor=pointer]:
+        - /url: tel:+79936307048
+        - img [ref=e18]
+        - text: +7 (993) 630-70-48
+      - link "Рассчитать" [ref=e20] [cursor=pointer]:
+        - /url: /dorogobuzh/contact
+  - generic [ref=e22]:
+    - generic [ref=e23]: О студии
+    - heading "3D-печать для клиентов из города Дорогобуж" [level=1] [ref=e25]
+    - paragraph [ref=e26]: "«Твой3д» — студия 3D-печати, моделирования, сканирования и прототипирования. Мы не заявляем отдельный офис в каждом городе: заказы из города Дорогобуж принимаем онлайн, рассчитываем стоимость по файлу, производим изделия на собственном оборудовании и отправляем готовый результат по России."
+  - generic [ref=e29]:
+    - generic [ref=e30]:
+      - text: Как работаем
+      - heading "Полный цикл производства под задачу клиента" [level=2] [ref=e31]
+    - generic [ref=e32]:
+      - paragraph [ref=e33]: Клиенты из городе Дорогобуж присылают STL, STEP, OBJ, чертежи или описание задачи. Мы подбираем технологию, материал и срок изготовления, затем согласуем стоимость до запуска в работу.
+      - paragraph [ref=e34]: "Основной профиль остаётся тем же, что и на текущем сайте: 3D-печать FDM/SLA/DLP, 3D-моделирование, 3D-сканирование, прототипирование и лазерная резка CO₂."
+  - generic [ref=e37]:
+    - generic [ref=e38]:
+      - img [ref=e40]
+      - heading "Собственное производство" [level=3] [ref=e42]
+      - paragraph [ref=e43]: Печатаем и контролируем изделия в своём производственном цикле.
+    - generic [ref=e44]:
+      - img [ref=e46]
+      - heading "Контроль качества" [level=3] [ref=e49]
+      - paragraph [ref=e50]: Проверяем геометрию, поверхность и соответствие задаче перед отправкой.
+    - generic [ref=e51]:
+      - img [ref=e53]
+      - heading "Сроки от 1 дня" [level=3] [ref=e56]
+      - paragraph [ref=e57]: Оперативно берём в работу прототипы, детали и малые серии.
+    - generic [ref=e58]:
+      - img [ref=e60]
+      - heading "Подбор технологии" [level=3] [ref=e63]
+      - paragraph [ref=e64]: Рекомендуем FDM, SLA, DLP, SLS или моделирование под конкретную задачу.
+    - generic [ref=e65]:
+      - img [ref=e67]
+      - heading "Инженерный подход" [level=3] [ref=e70]
+      - paragraph [ref=e71]: Учитываем нагрузку, материал, точность, постобработку и бюджет.
+    - generic [ref=e72]:
+      - img [ref=e74]
+      - heading "Доставка по России" [level=3] [ref=e79]
+      - paragraph [ref=e80]: Принимаем заказы дистанционно и отправляем готовые изделия транспортными компаниями.
+  - generic [ref=e83]:
+    - heading "Рассчитать 3D-печать для города Дорогобуж" [level=2] [ref=e84]
+    - paragraph [ref=e85]: Опишите задачу или отправьте файл модели — подберём материал, технологию и срок изготовления.
+    - link "Связаться с нами" [ref=e87] [cursor=pointer]:
+      - /url: /dorogobuzh/contact
+  - generic [ref=e88]:
+    - generic [ref=e89]:
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - img "Твой3д" [ref=e92]
+          - generic [ref=e93]: Твой3д
+        - paragraph [ref=e94]: Премиальная студия 3D-печати и прототипирования. Работаем по всей России.
+      - generic [ref=e95]:
+        - paragraph [ref=e96]: Услуги
+        - list [ref=e97]:
+          - listitem [ref=e98]:
+            - link "FDM-печать" [ref=e99] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e100]:
+            - link "SLA / Resin" [ref=e101] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e102]:
+            - link "Моделирование" [ref=e103] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e104]:
+            - link "Постобработка" [ref=e105] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: Студия
+        - list [ref=e108]:
+          - listitem [ref=e109]:
+            - link "О нас" [ref=e110] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e111]:
+            - link "Портфолио" [ref=e112] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e113]:
+            - link "Процесс" [ref=e114] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e115]:
+            - link "Контакты" [ref=e116] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e117]:
+        - paragraph [ref=e118]: Контакты
+        - list [ref=e119]:
+          - listitem [ref=e120]:
+            - link "Куровское, ул. Советская 105" [ref=e121] [cursor=pointer]:
+              - /url: https://yandex.ru/maps/?text=Куровское%20ул.%20Советская%20105
+          - listitem [ref=e122]:
+            - link "tvoy-3d@yandex.ru" [ref=e123] [cursor=pointer]:
+              - /url: mailto:tvoy-3d@yandex.ru
+          - listitem [ref=e124]:
+            - link "+7 (993) 630-70-48" [ref=e125] [cursor=pointer]:
+              - /url: tel:+79936307048
+          - listitem [ref=e126]:
+            - link "@Tvoy3d" [ref=e127] [cursor=pointer]:
+              - /url: https://t.me/Tvoy3d
+    - generic [ref=e128]:
+      - paragraph [ref=e129]: © 2026 Твой3д. Все права защищены.
+      - paragraph [ref=e130]: Made with precision and red light.

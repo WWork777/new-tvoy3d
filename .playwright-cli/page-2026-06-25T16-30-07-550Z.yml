@@ -1,0 +1,445 @@
+- main [ref=e2]:
+  - generic:
+    - generic:
+      - generic:
+        - generic: 3D-печать на заказ в городе Дорогобуж
+  - generic [ref=e5]:
+    - link "Твой3д Твой3д 3D Print Lab" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "Твой3д" [ref=e7]
+      - generic [ref=e8]: Твой3д
+      - generic [ref=e9]: 3D Print Lab
+    - navigation [ref=e10]:
+      - link "Услуги" [ref=e11] [cursor=pointer]:
+        - /url: /dorogobuzh#services
+      - link "О нас" [ref=e12] [cursor=pointer]:
+        - /url: /dorogobuzh/about
+      - link "Галерея" [ref=e13] [cursor=pointer]:
+        - /url: /dorogobuzh/gallery
+      - link "Блог" [ref=e14] [cursor=pointer]:
+        - /url: /dorogobuzh/blog
+      - link "Контакты" [ref=e15] [cursor=pointer]:
+        - /url: /dorogobuzh/contact
+    - generic [ref=e16]:
+      - link "+7 (993) 630-70-48" [ref=e17] [cursor=pointer]:
+        - /url: tel:+79936307048
+        - img [ref=e18]
+        - text: +7 (993) 630-70-48
+      - link "Рассчитать" [ref=e20] [cursor=pointer]:
+        - /url: /dorogobuzh/contact
+  - generic [ref=e22]:
+    - link "Все услуги в городе Дорогобуж" [ref=e24] [cursor=pointer]:
+      - /url: /dorogobuzh/#services
+      - img [ref=e25]
+      - text: Все услуги в городе Дорогобуж
+    - img [ref=e33]
+    - heading "3D-печать на заказ в городе Дорогобуж" [level=1] [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]: 3D-печать
+        - generic [ref=e40]: на
+        - generic [ref=e41]: заказ
+        - generic [ref=e42]: в
+        - generic [ref=e43]: городе
+      - generic [ref=e46]: Дорогобуж
+    - paragraph [ref=e47]: Профессиональная 3D-печать любой сложности с гарантией качества и точности. Принимаем заказы из города Дорогобуж, консультируем онлайн и отправляем готовые изделия по России.
+    - generic [ref=e48]:
+      - button "Рассчитать стоимость" [ref=e49] [cursor=pointer]:
+        - generic [ref=e50]: Рассчитать стоимость
+      - link "Смотреть цены" [ref=e51] [cursor=pointer]:
+        - /url: "#price"
+        - text: Смотреть цены
+        - img [ref=e52]
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - generic [ref=e56]: Стоимость
+        - generic [ref=e57]: от 5 ₽ / г
+      - generic [ref=e58]:
+        - generic [ref=e59]: Особенность
+        - generic [ref=e60]: Широкий выбор материалов
+      - generic [ref=e61]:
+        - generic [ref=e62]: Особенность
+        - generic [ref=e63]: Быстрое выполнение
+  - generic [ref=e66]:
+    - generic [ref=e68]:
+      - img [ref=e70]
+      - heading "Широкий выбор материалов" [level=3] [ref=e73]
+      - paragraph [ref=e74]: PLA, ABS, PETG, Flex, поликарбонат, фотополимер и другие
+    - generic [ref=e76]:
+      - img [ref=e78]
+      - heading "Быстрое выполнение" [level=3] [ref=e81]
+      - paragraph [ref=e82]: Сроки изготовления от 1 дня в зависимости от сложности
+    - generic [ref=e84]:
+      - img [ref=e86]
+      - heading "Любая сложность" [level=3] [ref=e89]
+      - paragraph [ref=e90]: Реализуем проекты с высокой детализацией и сложной геометрией
+    - generic [ref=e92]:
+      - img [ref=e94]
+      - heading "Экологичность" [level=3] [ref=e97]
+      - paragraph [ref=e98]: Используем биоразлагаемые материалы и минимизируем отходы
+  - paragraph [ref=e102]: "Мы используем современное оборудование и только качественные материалы. Печатаем по FDM, SLA, DLP и LCD — подбираем технологию под задачу: от концепт-моделей до инженерных деталей."
+  - generic [ref=e104]:
+    - generic [ref=e106]:
+      - generic [ref=e107]:
+        - generic [ref=e108]: Стоимость
+        - heading "Цены на услугу" [level=2] [ref=e110]
+      - paragraph [ref=e111]: Указанные цены — стартовые. Точная стоимость рассчитывается под ваш проект.
+    - generic [ref=e112]:
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - heading "PLA" [level=4] [ref=e115]
+          - generic [ref=e116]: от 5 ₽ / г
+        - paragraph [ref=e117]: Прочный, плотный, экологичный и биоразлагаемый.
+        - paragraph [ref=e118]: "Срок: от 1 дня"
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - heading "ABS" [level=4] [ref=e121]
+          - generic [ref=e122]: от 5 ₽ / г
+        - paragraph [ref=e123]: Ударостойкий универсальный пластик для функциональных деталей.
+        - paragraph [ref=e124]: "Срок: от 1 дня"
+      - generic [ref=e125]:
+        - generic [ref=e126]:
+          - heading "PETG" [level=4] [ref=e127]
+          - generic [ref=e128]: от 5 ₽ / г
+        - paragraph [ref=e129]: Ударопрочный полиэфир, стойкий к химии и УФ.
+        - paragraph [ref=e130]: "Срок: от 1 дня"
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - heading "HIPS" [level=4] [ref=e133]
+          - generic [ref=e134]: от 5 ₽ / г
+        - paragraph [ref=e135]: Твёрдый эластичный полистирол, стойкий к ударам и царапинам.
+        - paragraph [ref=e136]: "Срок: от 1 дня"
+      - generic [ref=e137]:
+        - generic [ref=e138]:
+          - heading "SBS" [level=4] [ref=e139]
+          - generic [ref=e140]: от 10 ₽ / г
+        - paragraph [ref=e141]: Жёсткий, стойкий к истиранию — альтернатива ABS.
+        - paragraph [ref=e142]: "Срок: от 1 дня"
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - heading "ASA" [level=4] [ref=e145]
+          - generic [ref=e146]: от 10 ₽ / г
+        - paragraph [ref=e147]: Атмосферостойкий инженерный пластик для уличных изделий.
+        - paragraph [ref=e148]: "Срок: от 1 дня"
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - heading "PC" [level=4] [ref=e151]
+          - generic [ref=e152]: от 20 ₽ / г
+        - paragraph [ref=e153]: Высокотемпературный поликарбонат для прочных термостойких деталей.
+        - paragraph [ref=e154]: "Срок: от 1 дня"
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - heading "TPU (A95)" [level=4] [ref=e157]
+          - generic [ref=e158]: от 20 ₽ / г
+        - paragraph [ref=e159]: Эластичный, прочный и износостойкий гибкий пластик.
+        - paragraph [ref=e160]: "Срок: от 1 дня"
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - heading "PP" [level=4] [ref=e163]
+          - generic [ref=e164]: от 20 ₽ / г
+        - paragraph [ref=e165]: Полипропилен с высокой химической стойкостью и эластичностью.
+        - paragraph [ref=e166]: "Срок: от 1 дня"
+      - generic [ref=e167]:
+        - generic [ref=e168]:
+          - heading "PA6" [level=4] [ref=e169]
+          - generic [ref=e170]: от 15 ₽ / г
+        - paragraph [ref=e171]: Полиамид с превосходными инженерными свойствами.
+        - paragraph [ref=e172]: "Срок: от 1 дня"
+      - generic [ref=e173]:
+        - generic [ref=e174]:
+          - heading "PA12" [level=4] [ref=e175]
+          - generic [ref=e176]: от 20 ₽ / г
+        - paragraph [ref=e177]: Ударопрочный износостойкий полиамид, упругий и химстойкий.
+        - paragraph [ref=e178]: "Срок: от 1 дня"
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - heading "WAX" [level=4] [ref=e181]
+          - generic [ref=e182]: от 20 ₽ / г
+        - paragraph [ref=e183]: Воск для литья металлов по выплавляемым моделям.
+        - paragraph [ref=e184]: "Срок: от 1 дня"
+  - generic [ref=e186]:
+    - generic [ref=e188]:
+      - generic [ref=e189]:
+        - generic [ref=e190]: Калькулятор
+        - heading "Калькулятор 3D-печати" [level=2] [ref=e192]
+      - paragraph [ref=e193]: Загрузите модель — оценим объём, время и стоимость.
+    - generic [ref=e194]:
+      - generic [ref=e196]:
+        - generic [ref=e198] [cursor=pointer]:
+          - img [ref=e201]
+          - paragraph [ref=e204]: Загрузите файл
+          - paragraph [ref=e205]: .stl,.obj,.3mf,.step,.stp,image/*
+          - generic [ref=e206]:
+            - img [ref=e207]
+            - text: Перетащите или нажмите
+        - generic [ref=e211]:
+          - img [ref=e212]
+          - text: Размер файла учитывается как поправка на сложность
+      - generic [ref=e216]:
+        - generic [ref=e218]:
+          - generic [ref=e219]:
+            - generic [ref=e220]: Тип печати
+            - generic [ref=e221]:
+              - button "FDM Пластиковая печать" [ref=e222] [cursor=pointer]:
+                - generic [ref=e224]:
+                  - generic [ref=e225]: FDM
+                  - generic [ref=e226]: Пластиковая печать
+              - button "SLA / Resin Фотополимер, 25 мкм" [ref=e228] [cursor=pointer]:
+                - generic [ref=e230]:
+                  - generic [ref=e231]: SLA / Resin
+                  - generic [ref=e232]: Фотополимер, 25 мкм
+              - button "Carbon Композит с углеволокном" [ref=e233] [cursor=pointer]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]: Carbon
+                  - generic [ref=e237]: Композит с углеволокном
+          - generic [ref=e238]:
+            - generic [ref=e239]: Материал
+            - generic [ref=e240]:
+              - button "PLA" [ref=e241] [cursor=pointer]:
+                - generic [ref=e245]: PLA
+              - button "PETG" [ref=e247] [cursor=pointer]:
+                - generic [ref=e251]: PETG
+              - button "ABS" [ref=e252] [cursor=pointer]:
+                - generic [ref=e256]: ABS
+              - button "Resin" [ref=e257] [cursor=pointer]:
+                - generic [ref=e261]: Resin
+              - button "Nylon" [ref=e262] [cursor=pointer]:
+                - generic [ref=e266]: Nylon
+              - button "Carbon" [ref=e267] [cursor=pointer]:
+                - generic [ref=e271]: Carbon
+          - generic [ref=e272]:
+            - generic [ref=e273]: Качество
+            - generic [ref=e274]:
+              - button "Черновое 0.3 мм" [ref=e275] [cursor=pointer]:
+                - generic [ref=e277]:
+                  - generic [ref=e278]: Черновое
+                  - generic [ref=e279]: 0.3 мм
+              - button "Стандарт 0.2 мм" [ref=e281] [cursor=pointer]:
+                - generic [ref=e283]:
+                  - generic [ref=e284]: Стандарт
+                  - generic [ref=e285]: 0.2 мм
+              - button "Высокое 0.1 мм" [ref=e286] [cursor=pointer]:
+                - generic [ref=e288]:
+                  - generic [ref=e289]: Высокое
+                  - generic [ref=e290]: 0.1 мм
+              - button "Ультра 0.05 мм" [ref=e291] [cursor=pointer]:
+                - generic [ref=e293]:
+                  - generic [ref=e294]: Ультра
+                  - generic [ref=e295]: 0.05 мм
+          - generic [ref=e296]:
+            - generic [ref=e297]:
+              - generic [ref=e298]: Размер
+              - generic [ref=e299]: 80 мм
+            - slider "Размер" [ref=e303] [cursor=pointer]: "80"
+          - generic [ref=e304]:
+            - generic [ref=e305]:
+              - generic [ref=e306]: Заполнение
+              - generic [ref=e307]: 20 %
+            - slider "Заполнение" [ref=e311] [cursor=pointer]: "20"
+          - generic [ref=e312]:
+            - generic [ref=e313]:
+              - generic [ref=e314]: Количество
+              - generic [ref=e315]: 1 шт
+            - slider "Количество" [ref=e318] [cursor=pointer]: "1"
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - generic [ref=e323]:
+              - img [ref=e324]
+              - text: Предварительная стоимость
+            - generic [ref=e327]: 1 816 ₽
+            - paragraph [ref=e328]: ≈ 86 г · 3.3 ч печати · 1 шт
+          - button "Оформить заказ" [ref=e329] [cursor=pointer]:
+            - generic [ref=e330]: Оформить заказ
+  - generic [ref=e332]:
+    - generic [ref=e334]:
+      - generic [ref=e335]: Почему мы
+      - heading "Преимущества работы с нами" [level=2] [ref=e337]
+    - generic [ref=e338]:
+      - generic [ref=e339]:
+        - img [ref=e341]
+        - generic [ref=e343]:
+          - heading "Быстрое прототипирование" [level=3] [ref=e344]
+          - paragraph [ref=e345]: Прототипы за часы, а не недели — идеально для тестирования идей.
+      - generic [ref=e346]:
+        - img [ref=e348]
+        - generic [ref=e350]:
+          - heading "Свобода дизайна" [level=3] [ref=e351]
+          - paragraph [ref=e352]: Сложные геометрические формы, недоступные традиционным методам.
+      - generic [ref=e353]:
+        - img [ref=e355]
+        - generic [ref=e357]:
+          - heading "Экономия ресурсов" [level=3] [ref=e358]
+          - paragraph [ref=e359]: Минимум отходов, печать по запросу — без обязательных тиражей.
+      - generic [ref=e360]:
+        - img [ref=e362]
+        - generic [ref=e364]:
+          - heading "Инженерные материалы" [level=3] [ref=e365]
+          - paragraph [ref=e366]: От PLA и ABS до нейлона, гибких полимеров и композитов.
+  - generic [ref=e368]:
+    - generic [ref=e370]:
+      - generic [ref=e371]: Процесс
+      - heading "Как мы работаем" [level=2] [ref=e373]
+    - list [ref=e376]:
+      - listitem [ref=e377]:
+        - generic [ref=e378]: "01"
+        - generic [ref=e379]:
+          - heading "Заявка" [level=3] [ref=e380]
+          - paragraph [ref=e381]: Оставляете заявку с описанием задачи или прикрепляете файл.
+      - listitem [ref=e382]:
+        - generic [ref=e383]: "02"
+        - generic [ref=e384]:
+          - heading "Расчёт" [level=3] [ref=e385]
+          - paragraph [ref=e386]: Оцениваем проект и сообщаем стоимость и сроки.
+      - listitem [ref=e387]:
+        - generic [ref=e388]: "03"
+        - generic [ref=e389]:
+          - heading "Подтверждение" [level=3] [ref=e390]
+          - paragraph [ref=e391]: Согласовываем детали и приступаем к работе.
+      - listitem [ref=e392]:
+        - generic [ref=e393]: "04"
+        - generic [ref=e394]:
+          - heading "Результат" [level=3] [ref=e395]
+          - paragraph [ref=e396]: Готовое изделие с доставкой или самовывозом.
+  - generic [ref=e401]:
+    - heading "Готовы обсудить проект?" [level=2] [ref=e402]
+    - paragraph [ref=e403]: Пришлите файл или ТЗ — ответим с расчётом в течение часа.
+    - generic [ref=e404]:
+      - button "Оставить заявку" [ref=e405] [cursor=pointer]:
+        - generic [ref=e406]: Оставить заявку
+      - link "Написать в Telegram" [ref=e407] [cursor=pointer]:
+        - /url: https://t.me/Tvoy3d
+  - generic [ref=e409]:
+    - heading "Другие услуги" [level=2] [ref=e411]
+    - generic [ref=e412]:
+      - link "Лазерная резка CO₂ Чистый рез с точностью 0,1 мм. Акрил, фанера, пластик, картон, EVA. Подробнее" [ref=e414] [cursor=pointer]:
+        - /url: /services/rezkaco2
+        - img [ref=e416]
+        - heading "Лазерная резка CO₂" [level=3] [ref=e418]
+        - paragraph [ref=e419]: Чистый рез с точностью 0,1 мм. Акрил, фанера, пластик, картон, EVA.
+        - generic [ref=e420]:
+          - text: Подробнее
+          - img [ref=e421]
+      - link "3D-сканирование Точные цифровые двойники с разрешением до 0,01 мм. Подробнее" [ref=e424] [cursor=pointer]:
+        - /url: /services/scan
+        - img [ref=e426]
+        - heading "3D-сканирование" [level=3] [ref=e431]
+        - paragraph [ref=e432]: Точные цифровые двойники с разрешением до 0,01 мм.
+        - generic [ref=e433]:
+          - text: Подробнее
+          - img [ref=e434]
+      - link "3D-моделирование Создаём модели с нуля по эскизу, ТЗ или физическому образцу. Подробнее" [ref=e437] [cursor=pointer]:
+        - /url: /services/model
+        - img [ref=e439]
+        - heading "3D-моделирование" [level=3] [ref=e442]
+        - paragraph [ref=e443]: Создаём модели с нуля по эскизу, ТЗ или физическому образцу.
+        - generic [ref=e444]:
+          - text: Подробнее
+          - img [ref=e445]
+      - link "Прототипирование Быстрые концепты и функциональные прототипы под серийное производство. Подробнее" [ref=e448] [cursor=pointer]:
+        - /url: /services/prototip
+        - img [ref=e450]
+        - heading "Прототипирование" [level=3] [ref=e461]
+        - paragraph [ref=e462]: Быстрые концепты и функциональные прототипы под серийное производство.
+        - generic [ref=e463]:
+          - text: Подробнее
+          - img [ref=e464]
+  - generic [ref=e467]:
+    - generic [ref=e469]:
+      - generic [ref=e470]:
+        - generic [ref=e471]: Контакты
+        - heading "Свяжитесь с нами" [level=2] [ref=e473]
+      - paragraph [ref=e474]: Ответим на сообщения в Telegram и почте в течение часа. Заходите в студию — покажем оборудование и образцы.
+    - generic [ref=e475]:
+      - generic [ref=e477]:
+        - link "Адрес Куровское, ул. Советская 105" [ref=e478] [cursor=pointer]:
+          - /url: https://yandex.ru/maps/?text=Куровское%20ул.%20Советская%20105
+          - generic [ref=e479]:
+            - img [ref=e481]
+            - generic [ref=e484]:
+              - paragraph [ref=e485]: Адрес
+              - paragraph [ref=e486]: Куровское, ул. Советская 105
+          - img [ref=e487]
+        - link "Почта tvoy-3d@yandex.ru" [ref=e490] [cursor=pointer]:
+          - /url: mailto:tvoy-3d@yandex.ru
+          - generic [ref=e491]:
+            - img [ref=e493]
+            - generic [ref=e496]:
+              - paragraph [ref=e497]: Почта
+              - paragraph [ref=e498]: tvoy-3d@yandex.ru
+          - img [ref=e499]
+        - link "Телефон +7 (993) 630-70-48" [ref=e502] [cursor=pointer]:
+          - /url: tel:+79936307048
+          - generic [ref=e503]:
+            - img [ref=e505]
+            - generic [ref=e507]:
+              - paragraph [ref=e508]: Телефон
+              - paragraph [ref=e509]: +7 (993) 630-70-48
+          - img [ref=e510]
+        - link "Telegram @Tvoy3d" [ref=e513] [cursor=pointer]:
+          - /url: https://t.me/Tvoy3d
+          - generic [ref=e514]:
+            - img [ref=e516]
+            - generic [ref=e519]:
+              - paragraph [ref=e520]: Telegram
+              - paragraph [ref=e521]: "@Tvoy3d"
+          - img [ref=e522]
+      - generic [ref=e527]:
+        - iframe [ref=e528]
+        - link "Открыть карту" [ref=e529] [cursor=pointer]:
+          - /url: https://www.openstreetmap.org/?mlat=55.5833&mlon=38.9333#map=16/55.5833/38.9333
+          - text: Открыть карту
+          - img [ref=e530]
+  - generic [ref=e533]:
+    - generic [ref=e534]:
+      - generic [ref=e535]:
+        - generic [ref=e536]:
+          - img "Твой3д" [ref=e537]
+          - generic [ref=e538]: Твой3д
+        - paragraph [ref=e539]: Премиальная студия 3D-печати и прототипирования. Работаем по всей России.
+      - generic [ref=e540]:
+        - paragraph [ref=e541]: Услуги
+        - list [ref=e542]:
+          - listitem [ref=e543]:
+            - link "FDM-печать" [ref=e544] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e545]:
+            - link "SLA / Resin" [ref=e546] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e547]:
+            - link "Моделирование" [ref=e548] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e549]:
+            - link "Постобработка" [ref=e550] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e551]:
+        - paragraph [ref=e552]: Студия
+        - list [ref=e553]:
+          - listitem [ref=e554]:
+            - link "О нас" [ref=e555] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e556]:
+            - link "Портфолио" [ref=e557] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e558]:
+            - link "Процесс" [ref=e559] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e560]:
+            - link "Контакты" [ref=e561] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e562]:
+        - paragraph [ref=e563]: Контакты
+        - list [ref=e564]:
+          - listitem [ref=e565]:
+            - link "Куровское, ул. Советская 105" [ref=e566] [cursor=pointer]:
+              - /url: https://yandex.ru/maps/?text=Куровское%20ул.%20Советская%20105
+          - listitem [ref=e567]:
+            - link "tvoy-3d@yandex.ru" [ref=e568] [cursor=pointer]:
+              - /url: mailto:tvoy-3d@yandex.ru
+          - listitem [ref=e569]:
+            - link "+7 (993) 630-70-48" [ref=e570] [cursor=pointer]:
+              - /url: tel:+79936307048
+          - listitem [ref=e571]:
+            - link "@Tvoy3d" [ref=e572] [cursor=pointer]:
+              - /url: https://t.me/Tvoy3d
+    - generic [ref=e573]:
+      - paragraph [ref=e574]: © 2026 Твой3д. Все права защищены.
+      - paragraph [ref=e575]: Made with precision and red light.
