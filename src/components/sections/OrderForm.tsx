@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { GlowButton } from "@/components/site/GlowButton";
-import { supabase } from "@/integrations/supabase/client";
+import { submitLead } from "@/lib/submitLead";
 import { toast } from "sonner";
 
 export function OrderForm({
@@ -29,18 +29,20 @@ export function OrderForm({
     }
     setBusy(true);
     const message = [summary, comment.trim()].filter(Boolean).join("\n\n");
-    const { error } = await supabase.from("leads").insert({
-      name: name.trim(),
-      contact: contact.trim(),
-      service,
-      message: message || null,
-      source: "calculator",
-    });
-    setBusy(false);
-    if (error) {
+    try {
+      await submitLead({
+        name: name.trim(),
+        contact: contact.trim(),
+        service,
+        message: message || null,
+        source: "calculator",
+      });
+    } catch {
+      setBusy(false);
       toast.error("Не удалось отправить. Попробуйте ещё раз.");
       return;
     }
+    setBusy(false);
     setSent(true);
   };
 
@@ -87,7 +89,10 @@ export function OrderForm({
                 </div>
                 <h3 className="mt-6 font-display text-2xl font-semibold">Заявка принята</h3>
                 <p className="mt-3 text-foreground/60">Мы свяжемся с вами в течение часа.</p>
-                <button onClick={close} className="cursor-pointer mt-8 text-sm text-foreground/60 underline-offset-4 hover:underline">
+                <button
+                  onClick={close}
+                  className="cursor-pointer mt-8 text-sm text-foreground/60 underline-offset-4 hover:underline"
+                >
                   Закрыть
                 </button>
               </div>

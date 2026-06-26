@@ -19,6 +19,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ApiLeadsRouteImport } from './routes/api/leads'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as AdminTestimonialsRouteImport } from './routes/admin.testimonials'
@@ -85,6 +86,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const ApiLeadsRoute = ApiLeadsRouteImport.update({
+  id: '/api/leads',
+  path: '/api/leads',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/leads': typeof ApiLeadsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -215,6 +222,7 @@ export interface FileRoutesByTo {
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/leads': typeof ApiLeadsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -244,6 +252,7 @@ export interface FileRoutesById {
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin_/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/leads': typeof ApiLeadsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -274,6 +283,7 @@ export interface FileRouteTypes {
     | '/admin/testimonials'
     | '/admin/login'
     | '/api/chat'
+    | '/api/leads'
     | '/blog/$slug'
     | '/services/$slug'
     | '/admin/'
@@ -301,6 +311,7 @@ export interface FileRouteTypes {
     | '/admin/testimonials'
     | '/admin/login'
     | '/api/chat'
+    | '/api/leads'
     | '/blog/$slug'
     | '/services/$slug'
     | '/admin'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/admin/testimonials'
     | '/admin_/login'
     | '/api/chat'
+    | '/api/leads'
     | '/blog/$slug'
     | '/services/$slug'
     | '/admin/'
@@ -351,6 +363,7 @@ export interface RootRouteChildren {
   CityGalleryRoute: typeof CityGalleryRoute
   AdminLoginRoute: typeof AdminLoginRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiLeadsRoute: typeof ApiLeadsRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   CityBlogSlugRoute: typeof CityBlogSlugRoute
   CityServicesSlugRoute: typeof CityServicesSlugRoute
@@ -428,6 +441,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/api/leads': {
+      id: '/api/leads'
+      path: '/api/leads'
+      fullPath: '/api/leads'
+      preLoaderRoute: typeof ApiLeadsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
       id: '/api/chat'
@@ -592,6 +612,7 @@ const rootRouteChildren: RootRouteChildren = {
   CityGalleryRoute: CityGalleryRoute,
   AdminLoginRoute: AdminLoginRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiLeadsRoute: ApiLeadsRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   CityBlogSlugRoute: CityBlogSlugRoute,
   CityServicesSlugRoute: CityServicesSlugRoute,

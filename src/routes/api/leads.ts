@@ -1,0 +1,189 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
+
+type LeadPayload = {
+  name?: unknown;
+  contact?: unknown;
+  service?: unknown;
+  material?: unknown;
+  volume?: unknown;
+  message?: unknown;
+  source?: unknown;
+};
+
+type LeadInsert = Database["public"]["Tables"]["leads"]["Insert"];
+
+const SUPABASE_TIMEOUT_MS = 5000;
+
+export const Route = createFileRoute("/api/leads")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        try {
+          const payload = {
+            id: crypto.randomUUID(),
+            ...normalizeLead((await request.json()) as LeadPayload),
+          };
+
+          if (!payload.name || !payload.contact) {
+            return json({ error: "Укажите имя и контакт" }, 400);
+          }
+
+          const [telegram, storage] = await Promise.all([
+            sendLeadToTelegram(payload),
+            saveLead(payload),
+          ]);
+
+          if (!telegram.ok && !storage.ok) {
+            return json({ error: "Не удалось отправить заявку" }, 500);
+          }
+
+          return json({ ok: true, id: payload.id, telegram, storage });
+        } catch (error) {
+          console.error("lead route error:", error);
+          return json({ error: error instanceof Error ? error.message : "Unknown error" }, 500);
+        }
+      },
+    },
+  },
+});
+
+function normalizeLead(payload: LeadPayload): LeadInsert {
+  return {
+    name: text(payload.name, 120),
+    contact: text(payload.contact, 160),
+    service: nullableText(payload.service, 120),
+    material: nullableText(payload.material, 120),
+    volume: nullableText(payload.volume, 120),
+    message: nullableText(payload.message, 2500),
+    source: nullableText(payload.source, 80),
+  };
+}
+
+function text(value: unknown, maxLength: number) {
+  return String(value ?? "")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function nullableText(value: unknown, maxLength: number) {
+  const result = text(value, maxLength);
+  return result || null;
+}
+
+function createServerSupabaseClient() {
+  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !key) {
+    throw new Error("Supabase env is not configured");
+  }
+
+  return createClient<Database>(url, key, {
+    global: {
+      fetch: timeoutFetch,
+    },
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
+}
+
+async function saveLead(payload: LeadInsert) {
+  try {
+    const supabase = createServerSupabaseClient();
+    const { error } = await supabase.from("leads").insert(payload);
+
+    if (error) {
+      console.error("lead insert error:", error);
+      return { ok: false, error: "supabase insert failed" };
+    }
+
+    return { ok: true };
+  } catch (error) {
+    console.error("lead insert exception:", error);
+    return { ok: false, error: "supabase unavailable" };
+  }
+}
+
+const timeoutFetch: typeof fetch = async (input, init) => {
+  if (init?.signal) {
+    return fetch(input, init);
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), SUPABASE_TIMEOUT_MS);
+
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+async function sendLeadToTelegram(lead: LeadInsert & { id?: string }) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID || process.env.TELEGRAM_GROUP_ID;
+
+  if (!token || !chatId) {
+    return { ok: false, skipped: true, reason: "telegram env is not configured" };
+  }
+
+  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      parse_mode: "HTML",
+      disable_web_page_preview: true,
+      text: formatTelegramMessage(lead),
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text().catch(() => "");
+    console.error("telegram send error:", response.status, body);
+    return { ok: false, skipped: false, status: response.status };
+  }
+
+  return { ok: true };
+}
+
+function formatTelegramMessage(lead: LeadInsert & { id?: string }) {
+  const rows = [
+    ["Имя", lead.name],
+    ["Контакт", lead.contact],
+    ["Услуга", lead.service],
+    ["Материал", lead.material],
+    ["Объём", lead.volume],
+    ["Источник", lead.source],
+    ["ID", lead.id],
+  ].filter(([, value]) => Boolean(value));
+
+  const details = rows
+    .map(([label, value]) => `<b>${escapeHtml(label)}:</b> ${escapeHtml(String(value))}`)
+    .join("\n");
+  const message = lead.message ? `\n\n<b>Комментарий:</b>\n${escapeHtml(lead.message)}` : "";
+
+  return `🧾 <b>Новая заявка с сайта</b>\n\n${details}${message}`;
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function json(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
+}

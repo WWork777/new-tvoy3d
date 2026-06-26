@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Reveal } from "@/components/site/Reveal";
 import { GlowButton } from "@/components/site/GlowButton";
 import { SERVICES } from "@/data/services";
-import { supabase } from "@/integrations/supabase/client";
+import { submitLead } from "@/lib/submitLead";
 import { toast } from "sonner";
 
 type ServiceSlug = (typeof SERVICES)[number]["slug"];
@@ -27,11 +27,7 @@ type QtyId = (typeof QTY_OPTIONS)[number]["id"];
 type UrgencyId = (typeof URGENCY)[number]["id"];
 
 const contactSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Укажите имя")
-    .max(80, "Слишком длинное имя"),
+  name: z.string().trim().min(2, "Укажите имя").max(80, "Слишком длинное имя"),
   phone: z
     .string()
     .trim()
@@ -61,10 +57,7 @@ export function FinalCTA({ onOpen: _onOpen }: { onOpen?: () => void } = {}) {
     [slug, qty, urgency, sent],
   );
 
-  const canNext =
-    (step === 0 && !!slug) ||
-    (step === 1 && !!qty) ||
-    (step === 2 && !!urgency);
+  const canNext = (step === 0 && !!slug) || (step === 1 && !!qty) || (step === 2 && !!urgency);
 
   const goNext = () => setStep((s) => Math.min(3, s + 1));
   const goBack = () => setStep((s) => Math.max(0, s - 1));
@@ -91,20 +84,24 @@ export function FinalCTA({ onOpen: _onOpen }: { onOpen?: () => void } = {}) {
       qtyLabel ? `Количество: ${qtyLabel}` : null,
       urgencyLabel ? `Сроки: ${urgencyLabel}` : null,
       parsed.data.comment ? `Комментарий: ${parsed.data.comment}` : null,
-    ].filter(Boolean).join("\n");
-    const { error } = await supabase.from("leads").insert({
-      name: parsed.data.name,
-      contact: parsed.data.phone,
-      service: selectedService?.shortTitle ?? null,
-      volume: qtyLabel ?? null,
-      message: message || null,
-      source: "final_cta",
-    });
-    setBusy(false);
-    if (error) {
+    ]
+      .filter(Boolean)
+      .join("\n");
+    try {
+      await submitLead({
+        name: parsed.data.name,
+        contact: parsed.data.phone,
+        service: selectedService?.shortTitle ?? null,
+        volume: qtyLabel ?? null,
+        message: message || null,
+        source: "final_cta",
+      });
+    } catch {
+      setBusy(false);
       toast.error("Не удалось отправить. Попробуйте ещё раз.");
       return;
     }
+    setBusy(false);
     setSent(true);
     toast.success("Заявка отправлена! Свяжемся в течение часа.");
   };
@@ -119,11 +116,11 @@ export function FinalCTA({ onOpen: _onOpen }: { onOpen?: () => void } = {}) {
 
             <div className="relative mx-auto max-w-3xl text-center">
               <p className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-foreground/60">
-                <span className="h-1 w-1 rounded-full bg-[oklch(0.58_0.22_25)]" /> Заявка за 30 секунд
+                <span className="h-1 w-1 rounded-full bg-[oklch(0.58_0.22_25)]" /> Заявка за 30
+                секунд
               </p>
               <h2 className="mt-5 font-display text-[clamp(2rem,4.6vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.03em]">
-                Готовы напечатать{" "}
-                <span className="gradient-text-red">вашу идею?</span>
+                Готовы напечатать <span className="gradient-text-red">вашу идею?</span>
               </h2>
               <p className="mt-4 text-foreground/65">
                 Три коротких шага — и мы сразу с вами свяжемся.
@@ -155,9 +152,7 @@ export function FinalCTA({ onOpen: _onOpen }: { onOpen?: () => void } = {}) {
                     >
                       {s.label}
                     </span>
-                    {i < steps.length - 1 && (
-                      <div className="h-px flex-1 bg-foreground/10" />
-                    )}
+                    {i < steps.length - 1 && <div className="h-px flex-1 bg-foreground/10" />}
                   </div>
                 );
               })}
@@ -245,18 +240,12 @@ export function FinalCTA({ onOpen: _onOpen }: { onOpen?: () => void } = {}) {
                     >
                       {/* summary */}
                       <div className="mb-5 flex flex-wrap items-center gap-2 text-[11px]">
-                        {selectedService && (
-                          <SummaryChip label={selectedService.shortTitle} />
-                        )}
+                        {selectedService && <SummaryChip label={selectedService.shortTitle} />}
                         {qty && (
-                          <SummaryChip
-                            label={QTY_OPTIONS.find((q) => q.id === qty)!.label}
-                          />
+                          <SummaryChip label={QTY_OPTIONS.find((q) => q.id === qty)!.label} />
                         )}
                         {urgency && (
-                          <SummaryChip
-                            label={URGENCY.find((u) => u.id === urgency)!.label}
-                          />
+                          <SummaryChip label={URGENCY.find((u) => u.id === urgency)!.label} />
                         )}
                       </div>
 
@@ -283,16 +272,16 @@ export function FinalCTA({ onOpen: _onOpen }: { onOpen?: () => void } = {}) {
                         </label>
                         <textarea
                           value={form.comment}
-                          onChange={(e) =>
-                            setForm((f) => ({ ...f, comment: e.target.value }))
-                          }
+                          onChange={(e) => setForm((f) => ({ ...f, comment: e.target.value }))}
                           maxLength={500}
                           rows={3}
                           placeholder="Опишите задачу или прикрепите ссылку на модель"
                           className="w-full resize-none rounded-2xl border border-foreground/10 bg-foreground/[0.02] px-4 py-3 text-sm outline-none transition focus:border-[oklch(0.58_0.22_25)]/50 focus:bg-background/60"
                         />
                         {errors.comment && (
-                          <p className="mt-1 text-xs text-[oklch(0.58_0.22_25)]">{errors.comment}</p>
+                          <p className="mt-1 text-xs text-[oklch(0.58_0.22_25)]">
+                            {errors.comment}
+                          </p>
                         )}
                       </div>
 

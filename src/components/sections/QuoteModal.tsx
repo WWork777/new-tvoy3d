@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, Check, X } from "lucide-react";
 import { GlowButton } from "@/components/site/GlowButton";
-import { supabase } from "@/integrations/supabase/client";
+import { submitLead } from "@/lib/submitLead";
 import { toast } from "sonner";
 
 const SERVICES = ["FDM", "SLA / Resin", "Моделирование", "Постобработка", "Серия"];
@@ -26,16 +26,21 @@ export function QuoteModal({ open, onClose }: { open: boolean; onClose: () => vo
       return;
     }
     setBusy(true);
-    const { error } = await supabase.from("leads").insert({
-      name: data.name.trim(),
-      contact: data.contact.trim(),
-      service: data.service,
-      material: data.material,
-      volume: data.volume || null,
-      source: "quote_modal",
-    });
+    try {
+      await submitLead({
+        name: data.name.trim(),
+        contact: data.contact.trim(),
+        service: data.service,
+        material: data.material,
+        volume: data.volume || null,
+        source: "quote_modal",
+      });
+    } catch {
+      setBusy(false);
+      toast.error("Не удалось отправить. Попробуйте ещё раз.");
+      return;
+    }
     setBusy(false);
-    if (error) { toast.error("Не удалось отправить. Попробуйте ещё раз."); return; }
     setSent(true);
   };
 
@@ -80,7 +85,10 @@ export function QuoteModal({ open, onClose }: { open: boolean; onClose: () => vo
                 </div>
                 <h3 className="mt-6 font-display text-2xl font-semibold">Заявка принята</h3>
                 <p className="mt-3 text-foreground/60">Мы свяжемся с вами в течение часа.</p>
-                <button onClick={close} className="cursor-pointer mt-8 text-sm text-foreground/60 underline-offset-4 hover:underline">
+                <button
+                  onClick={close}
+                  className="cursor-pointer mt-8 text-sm text-foreground/60 underline-offset-4 hover:underline"
+                >
                   Закрыть
                 </button>
               </div>
@@ -162,14 +170,14 @@ export function QuoteModal({ open, onClose }: { open: boolean; onClose: () => vo
                     Назад
                   </button>
                   {step < 2 ? (
-                    <GlowButton onClick={() => setStep((s) => s + 1)} icon={<ArrowRight className="h-4 w-4" />}>
+                    <GlowButton
+                      onClick={() => setStep((s) => s + 1)}
+                      icon={<ArrowRight className="h-4 w-4" />}
+                    >
                       Далее
                     </GlowButton>
                   ) : (
-                    <GlowButton
-                      onClick={submit}
-                      icon={<Check className="h-4 w-4" />}
-                    >
+                    <GlowButton onClick={submit} icon={<Check className="h-4 w-4" />}>
                       {busy ? "Отправляем…" : "Отправить заявку"}
                     </GlowButton>
                   )}
@@ -183,7 +191,15 @@ export function QuoteModal({ open, onClose }: { open: boolean; onClose: () => vo
   );
 }
 
-function Input({ placeholder, value, onChange }: { placeholder: string; value: string; onChange: (v: string) => void }) {
+function Input({
+  placeholder,
+  value,
+  onChange,
+}: {
+  placeholder: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <input
       value={value}
