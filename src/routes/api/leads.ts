@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { normalizeRussianPhoneContact } from "@/lib/phone";
 
 type LeadPayload = {
   name?: unknown;
@@ -52,7 +53,7 @@ export const Route = createFileRoute("/api/leads")({
 function normalizeLead(payload: LeadPayload): LeadInsert {
   return {
     name: text(payload.name, 120),
-    contact: text(payload.contact, 160),
+    contact: normalizeRussianPhoneContact(text(payload.contact, 160)),
     service: nullableText(payload.service, 120),
     material: nullableText(payload.material, 120),
     volume: nullableText(payload.volume, 120),
@@ -134,24 +135,42 @@ async function sendLeadToTelegram(lead: LeadInsert & { id?: string }) {
     return { ok: false, skipped: true, reason: "telegram env is not configured" };
   }
 
-  const response = await fetch(`https://tg-proxy.parsikovevgenij470.workers.dev/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: chatId,
-      parse_mode: "HTML",
-      disable_web_page_preview: true,
-      text: formatTelegramMessage(lead),
-    }),
+  const bases = getTelegramApiBases();
+  const body = JSON.stringify({
+    chat_id: chatId,
+    parse_mode: "HTML",
+    disable_web_page_preview: true,
+    text: formatTelegramMessage(lead),
   });
 
-  if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    console.error("telegram send error:", response.status, body);
-    return { ok: false, skipped: false, status: response.status };
+  for (const base of bases) {
+    try {
+      const response = await fetch(`${base}/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
+
+      if (response.ok) {
+        return { ok: true, base };
+      }
+
+      const responseBody = await response.text().catch(() => "");
+      console.error("telegram send error:", response.status, responseBody);
+    } catch (error) {
+      console.error("telegram send exception:", error);
+    }
   }
 
-  return { ok: true };
+  return { ok: false, skipped: false, reason: "telegram send failed" };
+}
+
+function getTelegramApiBases() {
+  return [
+    process.env.TELEGRAM_API_BASE_URL,
+    "https://tg-proxy.parsikovevgenij470.workers.dev",
+    "https://api.telegram.org",
+  ].filter((base, index, bases): base is string => Boolean(base) && bases.indexOf(base) === index);
 }
 
 function formatTelegramMessage(lead: LeadInsert & { id?: string }) {

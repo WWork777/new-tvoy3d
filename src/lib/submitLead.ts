@@ -1,3 +1,5 @@
+import { normalizeRussianPhoneContact } from "@/lib/phone";
+
 export type LeadPayload = {
   name: string;
   contact: string;
@@ -12,7 +14,10 @@ export async function submitLead(payload: LeadPayload) {
   const response = await fetch("/api/leads", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({
+      ...payload,
+      contact: normalizeRussianPhoneContact(payload.contact),
+    }),
   });
 
   const data = (await response.json().catch(() => ({}))) as { error?: string };
