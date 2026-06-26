@@ -18,7 +18,7 @@ import { Route as CityRouteImport } from './routes/$city'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
-import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as AdminTestimonialsRouteImport } from './routes/admin.testimonials'
@@ -82,9 +82,9 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog_/$slug',
-  path: '/blog/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -172,7 +172,7 @@ export interface FileRoutesByFullPath {
   '/$city': typeof CityRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/$city/about': typeof CityAboutRoute
@@ -199,7 +199,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$city': typeof CityRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/$city/about': typeof CityAboutRoute
@@ -228,7 +228,7 @@ export interface FileRoutesById {
   '/$city': typeof CityRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/$city_/about': typeof CityAboutRoute
@@ -244,7 +244,7 @@ export interface FileRoutesById {
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin_/login': typeof AdminLoginRoute
   '/api/chat': typeof ApiChatRoute
-  '/blog_/$slug': typeof BlogSlugRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/$city_/blog_/$slug': typeof CityBlogSlugRoute
@@ -329,7 +329,7 @@ export interface FileRouteTypes {
     | '/admin/testimonials'
     | '/admin_/login'
     | '/api/chat'
-    | '/blog_/$slug'
+    | '/blog/$slug'
     | '/services/$slug'
     | '/admin/'
     | '/$city_/blog_/$slug'
@@ -342,7 +342,7 @@ export interface RootRouteChildren {
   CityRoute: typeof CityRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   CityAboutRoute: typeof CityAboutRoute
@@ -351,7 +351,6 @@ export interface RootRouteChildren {
   CityGalleryRoute: typeof CityGalleryRoute
   AdminLoginRoute: typeof AdminLoginRoute
   ApiChatRoute: typeof ApiChatRoute
-  BlogSlugRoute: typeof BlogSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   CityBlogSlugRoute: typeof CityBlogSlugRoute
   CityServicesSlugRoute: typeof CityServicesSlugRoute
@@ -423,12 +422,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog_/$slug': {
-      id: '/blog_/$slug'
-      path: '/blog/$slug'
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof BlogRoute
     }
     '/api/chat': {
       id: '/api/chat'
@@ -569,12 +568,22 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CityRoute: CityRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   CityAboutRoute: CityAboutRoute,
@@ -583,7 +592,6 @@ const rootRouteChildren: RootRouteChildren = {
   CityGalleryRoute: CityGalleryRoute,
   AdminLoginRoute: AdminLoginRoute,
   ApiChatRoute: ApiChatRoute,
-  BlogSlugRoute: BlogSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   CityBlogSlugRoute: CityBlogSlugRoute,
   CityServicesSlugRoute: CityServicesSlugRoute,

@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { BLOG_POSTS } from "@/data/blog";
 import { getCity } from "@/data/cities";
-import { BlogPostError, BlogPostNotFound, BlogPostPage, blogPostHead } from "./blog_.$slug";
+import { BlogPostError, BlogPostNotFound, BlogPostPage, blogPostHead } from "./blog.$slug";
 
 export const Route = createFileRoute("/$city_/blog_/$slug")({
   loader: ({ params }) => {
