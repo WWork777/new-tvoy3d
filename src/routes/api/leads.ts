@@ -134,7 +134,7 @@ async function sendLeadToTelegram(lead: LeadInsert & { id?: string }) {
     return { ok: false, skipped: true, reason: "telegram env is not configured" };
   }
 
-  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+  const response = await fetch(`https://tg-proxy.parsikovevgenij470.workers.dev/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
