@@ -8,4 +8,4 @@ sleep 2
 cd /var/www/hyper-form-labs/dist/server
 exec node --no-warnings --experimental-vm-modules \
   /var/www/hyper-form-labs/node_modules/wrangler/wrangler-dist/cli.js \
-  dev --config /var/www/hyper-form-labs/dist/server/wrangler.json --port 3001 --ip 127.0.0.1 --no-bundle
+  dev --port 3001 --ip 127.0.0.1 --no-bundle

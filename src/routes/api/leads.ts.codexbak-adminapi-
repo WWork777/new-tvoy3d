@@ -16,7 +16,6 @@ type LeadPayload = {
 type LeadInsert = Database["public"]["Tables"]["leads"]["Insert"];
 
 const SUPABASE_TIMEOUT_MS = 5000;
-const ADMIN_API_TIMEOUT_MS = 3000;
 
 export const Route = createFileRoute("/api/leads")({
   server: {
@@ -97,12 +96,6 @@ function createServerSupabaseClient() {
 }
 
 async function saveLead(payload: LeadInsert) {
-  const adminApi = await saveLeadToAdminApi(payload);
-
-  if (adminApi.ok) {
-    return adminApi;
-  }
-
   try {
     const supabase = createServerSupabaseClient();
     const { error } = await supabase.from("leads").insert(payload);
@@ -116,47 +109,6 @@ async function saveLead(payload: LeadInsert) {
   } catch (error) {
     console.error("lead insert exception:", error);
     return { ok: false, error: "supabase unavailable" };
-  }
-}
-
-async function saveLeadToAdminApi(payload: LeadInsert) {
-  const url = process.env.LEADS_ADMIN_API_URL || "http://127.0.0.1:3005/q";
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), ADMIN_API_TIMEOUT_MS);
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      signal: controller.signal,
-      body: JSON.stringify({
-        table: "leads",
-        action: "insert",
-        rows: payload,
-      }),
-    });
-
-    if (!response.ok) {
-      const body = await response.text().catch(() => "");
-      console.error("admin lead insert error:", response.status, body);
-      return { ok: false, error: "admin api insert failed" };
-    }
-
-    const data = (await response.json().catch(() => null)) as {
-      error?: { message?: string };
-    } | null;
-
-    if (data?.error) {
-      console.error("admin lead insert error:", data.error);
-      return { ok: false, error: data.error.message || "admin api insert failed" };
-    }
-
-    return { ok: true, target: "admin_api" };
-  } catch (error) {
-    console.error("admin lead insert exception:", error);
-    return { ok: false, error: "admin api unavailable" };
-  } finally {
-    clearTimeout(timeout);
   }
 }
 
