@@ -1,37 +1,50 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ServicePage } from "@/components/sections/ServicePage";
+import { SeoLandingPage } from "@/components/sections/SeoLandingPage";
 import { getService, SERVICES } from "@/data/services";
+import { getSeoLandingPage, SEO_LANDING_PAGES, seoLandingHead } from "@/data/seoLandingPages";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const service = getService(params.slug);
-    if (!service) throw notFound();
-    return { service };
+    if (service) return { type: "service" as const, service };
+    const seoPage = getSeoLandingPage(params.slug);
+    if (seoPage) return { type: "seo" as const, seoPage };
+    throw notFound();
   },
   head: ({ loaderData }) => {
-    const s = loaderData?.service;
+    if (loaderData?.type === "seo") {
+      return { meta: seoLandingHead(loaderData.seoPage) };
+    }
+
+    const s = loaderData?.type === "service" ? loaderData.service : null;
     if (!s) return { meta: [{ title: "Услуга — Твой3д" }] };
 
     const metaMap: Record<string, { title: string; description: string }> = {
       "3dpechat": {
         title: "3D-печать на заказ в Москве | FDM, SLA, DLP от 5 ₽/г — Твой3д",
-        description: "3D-печать на заказ: FDM, SLA, DLP, LCD. 12+ материалов — PLA, ABS, PETG, TPU, нейлон, поликарбонат. Цены от 5 ₽/г, срок от 1 дня. Любая сложность. Бесплатный расчёт!",
+        description:
+          "3D-печать на заказ: FDM, SLA, DLP, LCD. 12+ материалов — PLA, ABS, PETG, TPU, нейлон, поликарбонат. Цены от 5 ₽/г, срок от 1 дня. Любая сложность. Бесплатный расчёт!",
       },
-      "rezkaco2": {
+      rezkaco2: {
         title: "Лазерная резка CO₂ на заказ | Акрил, фанера, пластик от 7 ₽/м.п. — Твой3д",
-        description: "Лазерная резка CO₂: акрил, фанера, МДФ, ДСП, поликарбонат, EVA, картон. Точность 0,1 мм, формат до 1500×1000 мм. От 7 ₽/м.п. Гравировка. Срок от 2 часов. Расчёт бесплатно.",
+        description:
+          "Лазерная резка CO₂: акрил, фанера, МДФ, ДСП, поликарбонат, EVA, картон. Точность 0,1 мм, формат до 1500×1000 мм. От 7 ₽/м.п. Гравировка. Срок от 2 часов. Расчёт бесплатно.",
       },
-      "scan": {
+      scan: {
         title: "3D-сканирование на заказ в Москве | Точность до 0,01 мм — Твой3д",
-        description: "Профессиональное 3D-сканирование: лазерное, фотограмметрия, структурированный свет. Реверс-инжиниринг, контроль качества, оцифровка объектов любого размера. От 2 000 ₽.",
+        description:
+          "Профессиональное 3D-сканирование: лазерное, фотограмметрия, структурированный свет. Реверс-инжиниринг, контроль качества, оцифровка объектов любого размера. От 2 000 ₽.",
       },
-      "model": {
+      model: {
         title: "3D-моделирование на заказ | CAD, промышленный дизайн — Твой3д",
-        description: "3D-моделирование на заказ: CAD-детали, промышленный дизайн, архитектурная визуализация, персонажи. Форматы STEP, STL, OBJ, FBX. От 3 000 ₽, срок от 1 дня. Расчёт бесплатно.",
+        description:
+          "3D-моделирование на заказ: CAD-детали, промышленный дизайн, архитектурная визуализация, персонажи. Форматы STEP, STL, OBJ, FBX. От 3 000 ₽, срок от 1 дня. Расчёт бесплатно.",
       },
-      "prototip": {
+      prototip: {
         title: "Прототипирование на заказ в Москве | Быстрые прототипы от 1 дня — Твой3д",
-        description: "Быстрое прототипирование: концепт-макеты, функциональные прототипы, малые серии до 50 шт. 3D-печать FDM/SLA, вакуумное литьё, CNC-фрезеровка. От 3 000 ₽. Расчёт бесплатно.",
+        description:
+          "Быстрое прототипирование: концепт-макеты, функциональные прототипы, малые серии до 50 шт. 3D-печать FDM/SLA, вакуумное литьё, CNC-фрезеровка. От 3 000 ₽. Расчёт бесплатно.",
       },
     };
 
@@ -55,7 +68,10 @@ export const Route = createFileRoute("/services/$slug")({
       <div>
         <h1 className="font-display text-3xl font-semibold">Услуга не найдена</h1>
         <p className="mt-2 text-foreground/55">Проверьте адрес — возможно, ссылка устарела.</p>
-        <a href="/" className="mt-6 inline-block rounded-full bg-foreground px-5 py-2.5 text-sm text-background">
+        <a
+          href="/"
+          className="mt-6 inline-block rounded-full bg-foreground px-5 py-2.5 text-sm text-background"
+        >
           На главную
         </a>
       </div>
@@ -64,9 +80,13 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServiceRoute() {
-  const { service } = Route.useLoaderData();
-  return <ServicePage service={service} />;
+  const data = Route.useLoaderData();
+  if (data.type === "seo") return <SeoLandingPage page={data.seoPage} />;
+  return <ServicePage service={data.service} />;
 }
 
 // Static list for prerender / type hints (not strictly needed)
-export const SERVICE_SLUGS = SERVICES.map((s) => s.slug);
+export const SERVICE_SLUGS = [
+  ...SERVICES.map((s) => s.slug),
+  ...SEO_LANDING_PAGES.map((page) => page.slug),
+];

@@ -4,14 +4,21 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://tvoy3d.ru";
+const maxUrlsPerSitemap = 45000;
 
 const citiesSource = await readFile(resolve(root, "src/data/cities.ts"), "utf8");
 const servicesSource = await readFile(resolve(root, "src/data/services.ts"), "utf8");
+const seoLandingSource = await readFile(resolve(root, "src/data/seoLandingPages.ts"), "utf8");
 const blogSource = await readFile(resolve(root, "src/data/blog.ts"), "utf8");
 
 const slugPattern = /["']?slug["']?\s*:\s*"([^"]+)"/g;
 const citySlugs = [...new Set([...citiesSource.matchAll(slugPattern)].map((match) => match[1]))];
-const serviceSlugs = [...new Set([...servicesSource.matchAll(slugPattern)].map((match) => match[1]))];
+const serviceSlugs = [
+  ...new Set([
+    ...[...servicesSource.matchAll(slugPattern)].map((match) => match[1]),
+    ...[...seoLandingSource.matchAll(slugPattern)].map((match) => match[1]),
+  ]),
+];
 const blogSlugs = [...new Set([...blogSource.matchAll(slugPattern)].map((match) => match[1]))];
 
 const basePaths = [
@@ -37,9 +44,9 @@ const cityPaths = citySlugs.flatMap((city) => [
 const today = new Date().toISOString().slice(0, 10);
 const urls = [...basePaths, ...cityPaths];
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
+const urlsetXml = (paths) => `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
+${paths
   .map(
     (path) => `  <url>
     <loc>${siteUrl}${path}</loc>
@@ -52,6 +59,39 @@ ${urls
 </urlset>
 `;
 
+const sitemapIndexXml = (files) => `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${files
+  .map(
+    (file) => `  <sitemap>
+    <loc>${siteUrl}/${file}</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>`,
+  )
+  .join("\n")}
+</sitemapindex>
+`;
+
+const chunks = [];
+for (let index = 0; index < urls.length; index += maxUrlsPerSitemap) {
+  chunks.push(urls.slice(index, index + maxUrlsPerSitemap));
+}
+
 await mkdir(resolve(root, "public"), { recursive: true });
-await writeFile(resolve(root, "public/sitemap.xml"), xml, "utf8");
-console.log(`Generated public/sitemap.xml with ${urls.length} URLs.`);
+
+if (chunks.length === 1) {
+  await writeFile(resolve(root, "public/sitemap.xml"), urlsetXml(urls), "utf8");
+  console.log(`Generated public/sitemap.xml with ${urls.length} URLs.`);
+} else {
+  const sitemapFiles = chunks.map((_, index) => `sitemap-${index + 1}.xml`);
+
+  await Promise.all(
+    chunks.map((chunk, index) =>
+      writeFile(resolve(root, "public", sitemapFiles[index]), urlsetXml(chunk), "utf8"),
+    ),
+  );
+  await writeFile(resolve(root, "public/sitemap.xml"), sitemapIndexXml(sitemapFiles), "utf8");
+  console.log(
+    `Generated public/sitemap.xml index with ${sitemapFiles.length} sitemaps and ${urls.length} URLs.`,
+  );
+}

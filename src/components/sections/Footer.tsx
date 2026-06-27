@@ -25,6 +25,19 @@ const STUDIO_LINKS: FooterLink[] = [
   { label: "Контакты", href: "/contact" },
 ];
 
+const SEO_LINKS: FooterLink[] = [
+  { label: "3D-печать деталей", href: "/services/3d-pechat-detalei" },
+  { label: "Фигурки на заказ", href: "/services/3d-pechat-figurki-na-zakaz" },
+  { label: "Фотополимерная печать", href: "/services/fotopolimernaya-pechat" },
+  { label: "Обратный инжиниринг", href: "/services/obratnyy-inzhiniring-detalei" },
+  { label: "Фрезеровка ЧПУ", href: "/services/frezerovka-chpu" },
+  { label: "Лазерная резка фанеры", href: "/services/lazernaya-rezka-fanery" },
+  { label: "Корпуса из пластика", href: "/services/korpusa-iz-plastika-na-zakaz" },
+  { label: "Архитектурные макеты", href: "/services/arhitekturnye-makety" },
+  { label: "Литьё и формы", href: "/services/litie-plastika-i-silikonovye-formy" },
+  { label: "3D-сувениры", href: "/services/suveniry-na-zakaz-3d" },
+];
+
 const isExternalHref = (href: string) => /^https?:/i.test(href);
 
 function footerHref(item: FooterLink, city?: City) {
@@ -40,7 +53,13 @@ export function Footer({ city }: { city?: City }) {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
-            <img src={logo} alt="Твой3д" width={26} height={26} className="drop-shadow-[0_0_12px_rgba(219,17,37,0.5)]" />
+            <img
+              src={logo}
+              alt="Твой3д"
+              width={26}
+              height={26}
+              className="drop-shadow-[0_0_12px_rgba(219,17,37,0.5)]"
+            />
             <span className="font-display text-base font-semibold">Твой3д</span>
           </div>
           <p className="mt-4 max-w-xs text-sm text-foreground/50">
@@ -74,6 +93,23 @@ export function Footer({ city }: { city?: City }) {
         </div>
       </div>
 
+      <div className="mx-auto mt-10 max-w-7xl px-5">
+        <p className="text-xs uppercase tracking-[0.22em] text-foreground/40">
+          Популярные направления
+        </p>
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          {SEO_LINKS.map((item) => (
+            <a
+              key={item.href}
+              href={footerHref(item, city)}
+              className="text-foreground/60 transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
       <div className="mx-auto mt-12 flex max-w-7xl flex-col items-start justify-between gap-3 px-5 text-xs text-foreground/40 sm:flex-row sm:items-center">
         <p>© {new Date().getFullYear()} Твой3д. Все права защищены.</p>
         <p>Made with precision and red light.</p>
@@ -89,7 +125,10 @@ function Col({ title, items, city }: { title: string; items: FooterLink[]; city?
       <ul className="mt-4 space-y-2 text-sm">
         {items.map((item) => (
           <li key={item.label}>
-            <a href={footerHref(item, city)} className="text-foreground/70 transition-colors hover:text-foreground">
+            <a
+              href={footerHref(item, city)}
+              className="text-foreground/70 transition-colors hover:text-foreground"
+            >
               {item.label}
             </a>
           </li>
