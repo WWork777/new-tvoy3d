@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Check, Layers3, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Layers3, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/sections/Footer";
@@ -68,10 +68,10 @@ export function SeoLandingPage({ page, city }: { page: SeoLandingPageData; city?
             >
               <GlowButton onClick={() => setOpen(true)}>Рассчитать стоимость</GlowButton>
               <a
-                href="#keywords"
+                href="#contacts"
                 className="group inline-flex items-center gap-2 rounded-full glass px-5 py-3 text-sm text-foreground/80 transition hover:text-foreground"
               >
-                Смотреть ключи
+                Обсудить проект
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </a>
             </motion.div>
@@ -86,33 +86,35 @@ export function SeoLandingPage({ page, city }: { page: SeoLandingPageData; city?
             <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[oklch(0.58_0.22_25)]/20 blur-3xl" />
             <div className="relative flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[oklch(0.58_0.22_25)]/10 text-[oklch(0.58_0.22_25)]">
-                <Search className="h-5 w-5" />
+                <Layers3 className="h-5 w-5" />
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/45">
-                  SEO-интент
+                  Под задачу
                 </p>
-                <p className="mt-1 text-sm leading-relaxed text-foreground/70">{page.intent}</p>
+                <p className="mt-1 text-sm leading-relaxed text-foreground/70">{page.offer}</p>
               </div>
             </div>
 
             <div className="relative mt-6 rounded-2xl border border-foreground/10 bg-foreground/[0.02] p-5">
               <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/45">
-                Что предлагаем
+                Как работаем
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-foreground/70">{page.offer}</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/70">
+                Разберём файл, чертёж, фото или описание, подберём технологию и материал, затем
+                согласуем стоимость и срок изготовления.
+              </p>
             </div>
 
-            <div className="relative mt-5 grid grid-cols-2 gap-3">
-              {page.keywords.slice(0, 4).map((keyword) => (
-                <div
-                  key={keyword.phrase}
-                  className="rounded-2xl border border-foreground/10 bg-background/45 p-4"
-                >
-                  <p className="text-xs leading-snug text-foreground/65">{keyword.phrase}</p>
-                  <p className="mt-2 font-display text-lg font-semibold text-[oklch(0.58_0.22_25)]">
-                    {keyword.count}
-                  </p>
+            <div className="relative mt-5 space-y-3">
+              {[
+                "Проверяем модель или помогаем подготовить её с нуля",
+                "Подбираем технологию под прочность, детализацию и бюджет",
+                "Можем сделать постобработку, покраску и сборку",
+              ].map((item) => (
+                <div key={item} className="flex gap-2 text-sm text-foreground/68">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[oklch(0.58_0.22_25)]" />
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
@@ -148,45 +150,6 @@ export function SeoLandingPage({ page, city }: { page: SeoLandingPageData; city?
                   )}
                 </article>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="keywords" className="relative py-14 sm:py-20">
-        <div className="mx-auto max-w-7xl px-5">
-          <Reveal>
-            <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-              <div>
-                <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-foreground/60">
-                  <span className="h-1 w-1 rounded-full bg-[oklch(0.58_0.22_25)]" /> Частотные ключи
-                </span>
-                <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] font-semibold leading-[1.05] tracking-[-0.02em]">
-                  Семантика <span className="gradient-text-red">страницы</span>
-                </h2>
-              </div>
-              <p className="max-w-md text-sm leading-relaxed text-foreground/55">
-                В блок включены фразы из Wordstat, собранные под эту посадочную страницу. Они
-                помогают расширить текст без противоречий текущим услугам.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {page.keywords.map((keyword, index) => (
-              <motion.div
-                key={`${keyword.phrase}-${index}`}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.35, delay: Math.min(index * 0.015, 0.18) }}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-foreground/10 bg-foreground/[0.018] px-4 py-3"
-              >
-                <span className="text-sm leading-snug text-foreground/72">{keyword.phrase}</span>
-                <span className="shrink-0 rounded-full bg-[oklch(0.58_0.22_25)]/10 px-2.5 py-1 font-display text-xs text-[oklch(0.58_0.22_25)]">
-                  {keyword.count}
-                </span>
-              </motion.div>
             ))}
           </div>
         </div>
